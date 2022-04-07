@@ -10,16 +10,15 @@
     <form action="/" method="GET">
       <label>Choose a Category</label>
       <% categories.forEach(c => { %>
-        <% console.log(c) %> 
         <div>
           <input type="radio" name="category" value="<%= c %>" id="<%= c %>"/>
-          <label for="<%= c %>" ><%= c %> </label>
+          <label for="<%= c %>" ><%= c %></label>
         </div>
         <% }); %>
       <button type="submit">Get Chuck Norris Joke</button>
     </form>
     <% if (joke) { %>
-      <h3><%= joke %> </h3>
+      <h3><%= joke %></h3>
     <% } else { %>
       <h3>I'm so empty inside. Get me a joke, fill me with laughter!</h3>
     <% } %>

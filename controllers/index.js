@@ -1,28 +1,50 @@
-//const request = require('request');
+const request = require('request');
+const rootURL = `https://api.chucknorris.io/jokes/random`;
+const response = require('express');
 const axios = require('axios').default;
 
 module.exports = {
     index
 }
 
-/*---using axios---*/
-async function index(req, res) {
-    const categoriesURL = await axios.get(`https://api.chucknorris.io/jokes/categories`);
-    const categories = await categoriesURL.data;
-    try {
-        res.render('index', {title: 'PW', categories, joke: null});
-    } catch(err) {
-        res.send(err);
-    } finally {
-        const response = await axios.get(`https://api.chucknorris.io/jokes/random?category=${req.query.category}`);
-        console.log(req.query.category)
-        console.log(response)
-        const joke = await response.data.value;
-        res.render('index', {title: 'PW', joke, categories});
-    }
+/*---using request---*/
+function index(req, res) {
+    request(`https://api.chucknorris.io/jokes/categories`,
+    function(err, response, body) {
+        const categories = JSON.parse(body)
+        console.log(categories)
+        if (req.query.category) {
+            const jokeURL = request(`https://api.chucknorris.io/jokes/random?category=${req.query.category}`, 
+            function(err, response, body) {
+                const jokeInfo = JSON.parse(body);
+                const joke = jokeInfo.value;
+                res.render('index', {
+                    title: 'PW',
+                    categories,
+                    joke
+                });
+            })
+        } else {
+            res.render('index', {
+                title: 'PW',
+                categories,
+                joke: null
+            })
+        }
+    })
 }
 
-/*---using request---*/
+/*---original axios---*/
+// async function index (req, res, next) {
+    //const info = await axios.get(`${rootURL}`);
+    //const joke = info.value;
+    //res.render('index', {
+        //title: 'PW > Chuck Norris',
+        //joke
+    //})
+
+//}
+/*---original request---*/
 // function index (req, res, next) {
 //     request(
 //         `${rootURL}`,
