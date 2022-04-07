@@ -19,7 +19,7 @@ function index(req, res) {
                 const jokeInfo = JSON.parse(body);
                 const joke = jokeInfo.value;
                 res.render('index', {
-                    title: 'PW',
+                    title: 'PW > Chuck Norris',
                     categories,
                     joke
                 });

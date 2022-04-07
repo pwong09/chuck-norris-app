@@ -6,9 +6,9 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h3>Choose a category, get a Chuck Norris joke, laugh.</h3>
     <form action="/" method="GET">
-      <label>Choose a Category</label>
+      <label>Categories:</label><br>
       <% categories.forEach(c => { %>
         <div>
           <input type="radio" name="category" value="<%= c %>" id="<%= c %>"/>
