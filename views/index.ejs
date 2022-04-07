@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <form action="/" method="GET">
+      <label>Choose a Category</label>
+      <% categories.forEach(c => { %>
+        <% console.log(c) %> 
+        <div>
+          <input type="radio" name="category" value="<%= c %>" id="<%= c %>"/>
+          <label for="<%= c %>" ><%= c %> </label>
+        </div>
+        <% }); %>
+      <button type="submit">Get Chuck Norris Joke</button>
+    </form>
+    <% if (joke) { %>
+      <h3><%= joke %> </h3>
+    <% } else { %>
+      <h3>I'm so empty inside. Get me a joke, fill me with laughter!</h3>
+    <% } %>
+  </body>
+</html>
